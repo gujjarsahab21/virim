@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+    .profile-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .profile-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+    .user-info {
+      margin-bottom: 20px;
+    }
+    .user-info label {
+      font-weight: bold;
+    }
+    .welcome-message {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+    }
+    .logout-btn {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-container">
+      <h1>User Profile</h1>
+      <div class="welcome-message">
+        <p>Welcome, <span id="userName"></span>!</p>
+      </div>
+      <div class="user-info">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <span id="firstName" class="form-text"></span>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <span id="lastName" class="form-text"></span>
+        </div>
+        <div class="form-group">
+          <label for="state">State:</label>
+          <span id="state" class="form-text"></span>
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <span id="city" class="form-text"></span>
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zipcode:</label>
+          <span id="zipcode" class="form-text"></span>
+        </div>
+      </div>
+      <div class="logout-btn">
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    if (!storedUser) {
+      alert('Please log in to view this page.');
+      window.location.href = './login.html'; 
+    } else {
+      
+      document.getElementById('userName').textContent = `${storedUser.firstName} ${storedUser.lastName}`;
+      document.getElementById('firstName').textContent = storedUser.firstName;
+      document.getElementById('lastName').textContent = storedUser.lastName;
+      document.getElementById('state').textContent = storedUser.state;
+      document.getElementById('city').textContent = storedUser.city;
+      document.getElementById('zipcode').textContent = storedUser.zipcode;
+    }
+
+    function logout() {
+      localStorage.removeItem('user'); 
+      window.location.href = './index.html'; 
+    }
+  </script>
+</body>
+</html>
